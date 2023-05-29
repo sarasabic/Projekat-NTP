@@ -83,7 +83,7 @@ Administrator admin;
 	}
 
 //------------------------------------------------------------------------------------------------
-	void menu(){
+	void clanMeni(){
 		
 		int izbor1, izbor2;
 		cout<<linija;
@@ -117,6 +117,29 @@ Administrator admin;
 		}
 
 
+void ispisClanova(){
+    fstream file_;
+
+    file_.open("text.txt", ios::in);
+    string line;
+    if( file_.is_open()){
+        while(getline(file_,line)){
+            cout<<line<<endl;
+        }
+    }
+    file_.close();
+}
+void registracija_knjige(){
+    char nazivknjige[30];
+    cout<<"Unesite naziv knjige: "<<endl;
+    cin.getline(nazivknjige,30);
+
+    ofstream knjige;
+    knjige.open("knjige_nazivi.txt", ios::app);
+    knjige<< nazivknjige <<"\n";
+    knjige.close();
+}
+
 //MAIN
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
@@ -130,7 +153,7 @@ int main(){
 	admin.administrator.ID = 0000;
 	admin.uloga = administrator;
 //------------------------------------------------------------------------------------------------	
-		
+    char nazivknjige[30];
 
 		if(loginMeni()==1){
 			char username[20];
