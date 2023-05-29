@@ -26,7 +26,7 @@ using namespace std;
 char * linija = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 Administrator admin;
 
-//void unosClana(){}
+
 	
 	int loginMeni(){
 		system("cls");
@@ -57,25 +57,31 @@ Administrator admin;
 	}
 	
 	//------------------------------------------------------------------------------------------------
+		//ADMIN MENI
 	int adminMeni() {
 		int izbor;
+
 		system("cls");
 		do
 		{
 			cout << linija << "\t ADMIN" << linija;
 			cout << "1. Pregled clanova" << endl;
-		/*	cout << "2. Unos novog studenta" << endl;
-			cout << "3. Prikazi rezultate testova" << endl;
+			cout << "2. Unos nove knjige" << endl;
+		/*	cout << "3. Prikazi rezultate testova" << endl;
 			cout << "4. Pretraga" << endl;
-			cout << "5. Resetuj test za studenta" << endl;		
+			cout << "5. Resetuj test za studenta" << endl;
 			cout << "6. Prikazi sve studente" << endl;
 			cout << "7. Priakzi sva pitanja sa testa" << endl;
 			cout << "8. Kraj rada" << crt;*/
 			cout << "Unesite izbor: ";
 			cin >> izbor;
+				cin.ignore();
 		} while (izbor<1 || izbor>8);
+
 		return izbor;
+
 	}
+
 //------------------------------------------------------------------------------------------------
 	void menu(){
 		
@@ -125,16 +131,31 @@ int main(){
 	admin.uloga = administrator;
 //------------------------------------------------------------------------------------------------	
 		
+
 		if(loginMeni()==1){
 			char username[20];
 			char password[30];
-			int broj=login(username,password);;
+			int broj=login(username,password,br_clanova);
 					if (broj==admin.administrator.ID){
-					adminMeni();
-			}
+							if (adminMeni()==1){
+		                 	ispisClanova();
+			                }
+
+
+			if (adminMeni()==2){
+			registracija_knjige();
+			cout<<"  REGISTROVALI STE KNJIGU U SISTEM. "
+			<<endl<<endl;
+			system("pause");
+			system ("cls");
+				}
+				else{
+					if (broj==cln.clan.ID){
+					clanMeni();}
 		}
-//------------------------------------------------------------------------------------------------	
-		menu();	
+}
+		}
+
 //------------------------------------------------------------------------------------------------	
 	//DATOTEKA
 //------------------------------------------------------------------------------------------------
