@@ -157,6 +157,7 @@ void registracija_clana (){
 
 void registracija_knjige(){
     char nazivknjige[30];
+    system ("cls");
     cout<<"Unesite naziv knjige: "<<endl;
     cin.getline(nazivknjige,30);
 
@@ -164,6 +165,7 @@ void registracija_knjige(){
     knjige.open("knjige_nazivi.txt", ios::app);
     knjige<< nazivknjige <<"\n";
     knjige.close();
+    system ("cls");
 }
 
 
