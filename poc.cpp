@@ -180,6 +180,26 @@ void registracija_knjige(){
     system ("cls");
 }
 
+void pregled_knjiga() {
+    ifstream datoteka("knjige_nazivi.txt");
+    if (!datoteka) {
+        cerr << "Nemoguce otvoriti datoteku knjige_nazivi.txt." << endl;
+        return;
+    }
+    string naziv, ime, prezime, godina, zanr;
+
+    while (getline(datoteka, naziv) && getline(datoteka, ime) && getline(datoteka, prezime)&& getline(datoteka, godina)&& getline(datoteka, zanr)) {
+        cout << "Naslov: " << naziv << endl;
+        cout << "Ime autora: " << ime<< endl;
+        cout << "Prezime autora: " << prezime << endl;
+        cout << "Godina izdanja: " << godina << endl;
+        cout << "Zanr: " << zanr << endl;
+        cout << endl;
+    }
+
+    datoteka.close();
+}
+
 
 
 void potvrda_clanstva(fstream file_){
@@ -225,6 +245,7 @@ int main(){
     admin.uloga = administrator;
 
     registracija_knjige();
+    pregled_knjiga();
 
 //------------------------------------------------------------------------------------------------
     int br_clanova=0;
