@@ -94,11 +94,11 @@ int adminMeni() {
         cout << linija << "\t ADMIN" << linija;
         cout << "1. Pregled clanova" << endl;
         cout << "2. Unos nove knjige" << endl;
-        /*	cout << "3. Prikazi rezultate testova" << endl;
-            cout << "4. Pretraga" << endl;
-            cout << "5. Resetuj test za studenta" << endl;
-            cout << "6. Prikazi sve studente" << endl;
-            cout << "7. Priakzi sva pitanja sa testa" << endl;
+        /*	cout << "3. " << endl;
+            cout << "4. " << endl;
+            cout << "5. " << endl;
+            cout << "6. " << endl;
+            cout << "7. " << endl;
             cout << "8. Kraj rada" << crt;*/
         cout << "Unesite izbor: ";
         cin >> izbor;
@@ -156,14 +156,26 @@ void registracija_clana (){
 }
 
 void registracija_knjige(){
-    char nazivknjige[30];
+    Knjiga unos;
     system ("cls");
     cout<<"Unesite naziv knjige: "<<endl;
-    cin.getline(nazivknjige,30);
-
+    cin.getline(unos.Naziv_knjige, 30);
+    cout<<"Unesite ime autora: "<<endl;
+    cin.getline(unos.Ime_autora, 30);
+    cout<<"Unesite prezime autora: "<<endl;
+    cin.getline(unos.Prezime_autora, 30);
+    cout<<"Unesite godinu izdanja knjige: "<<endl;
+    cin>>unos.Godina_izdanja;
+    cin.ignore();
+    cout<<"Unesite zanr: "<<endl;
+    cin.getline(unos.Zanr, 30);
     ofstream knjige;
     knjige.open("knjige_nazivi.txt", ios::app);
-    knjige<< nazivknjige <<"\n";
+    knjige<< unos.Naziv_knjige<<"\n";
+    knjige<< unos.Ime_autora<<"\n";
+    knjige<< unos.Prezime_autora<<"\n";
+    knjige<< unos.Godina_izdanja<<"\n";
+    knjige<< unos.Zanr<<"\n";
     knjige.close();
     system ("cls");
 }
@@ -211,9 +223,12 @@ int main(){
     strcpy(admin.administrator.password, "biblioteka");
     admin.administrator.ID = 0000;
     admin.uloga = administrator;
+
+    registracija_knjige();
+
 //------------------------------------------------------------------------------------------------
     int br_clanova=0;
-    char nazivknjige[30];
+    //char nazivknjige[30];
     ofstream knjige;
 
 
