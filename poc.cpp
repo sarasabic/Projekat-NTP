@@ -118,62 +118,6 @@ int adminMeni() {
 }
 
 
-//---------------------------------LOGIN---------------------------------------------------------------
-
-//------------------------------------------------------------------------------------------------
-void opcija1() {
-    cout << "Opcija 1." << endl;
-    char username[20];
-    char password[30];
-    int broj=login(username,password,br_clanova);
-    if (broj==admin.administrator.ID){
-        if (adminMeni()==1){
-            ispisClanova();
-        }}
-}
-void opcija2() {
-    cout << "Opcija 2." << endl;
-    registracija_clana();
-
-    br_clanova=br_clanova+1;
-    system ("cls");
-    cout<<"                  REGISTROVALI STE SE U NAS SISTEM. "
-        <<endl<<endl<<"                  Izvrsite login:"<<endl<<endl;
-    system("pause");
-    system ("cls");
-}
-
-void opcija3() {
-    cout << << endl;
-
-}
-int loginMeni(){
-
-    while (true) {
-        cout << "Menu:" << endl;
-        cout << "1. Login" << endl;
-        cout << "2. Registracija clana" << endl;
-        cout << "3. Exit" << endl;
-
-        int opcija;
-        cout << "Izaberite opciju: ";
-        cin >> opcija;
-
-        switch (opcija) {
-            case 1:
-                opcija1();
-                break;
-            case 2:
-                opcija2();
-                break;
-            case 3:
-                cout << "Exiting..." << endl;
-                return 1;
-            default:
-                cout << "Netocan odabir. Pokusajte ponovo." << endl;
-        }
-    }
-}
 //------------------------------------------------------------------------------------------------
 //__________________________________REGISTRACIJE_________________________________________________
 
@@ -274,7 +218,63 @@ void ispisClanova(){
     }
     file_.close();
 }
+//---------------------------------LOGIN---------------------------------------------------------------
 
+//------------------------------------------------------------------------------------------------
+
+void opcija1() {
+    cout << "Opcija 1." << endl;
+    char username[20];
+    char password[30];
+    int broj=login(username,password,br_clanova);
+    if (broj==admin.administrator.ID){
+        if (adminMeni()==1){
+            ispisClanova();
+        }}
+}
+void opcija2() {
+    cout << "Opcija 2." << endl;
+    registracija_clana();
+
+    br_clanova=br_clanova+1;
+    system ("cls");
+    cout<<"                  REGISTROVALI STE SE U NAS SISTEM. "
+        <<endl<<endl<<"                  Izvrsite login:"<<endl<<endl;
+    system("pause");
+    system ("cls");
+}
+
+void opcija3() {
+    cout << << endl;
+
+}
+int loginMeni(){
+
+    while (true) {
+        cout << "Menu:" << endl;
+        cout << "1. Login" << endl;
+        cout << "2. Registracija clana" << endl;
+        cout << "3. Exit" << endl;
+
+        int opcija;
+        cout << "Izaberite opciju: ";
+        cin >> opcija;
+
+        switch (opcija) {
+            case 1:
+                opcija1();
+                break;
+            case 2:
+                opcija2();
+                break;
+            case 3:
+                cout << "Exiting..." << endl;
+                return 1;
+            default:
+                cout << "Netocan odabir. Pokusajte ponovo." << endl;
+        }
+    }
+}
 
 //MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN
 //------------------------------------------------------------------------------------------------
