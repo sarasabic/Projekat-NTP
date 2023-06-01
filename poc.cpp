@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include<iomanip>
-#include<string.h>
+#include <iomanip>
+#include <string.h>
 using namespace std;
 
 enum pozicija {clan, administrator};
@@ -99,8 +99,25 @@ int adminMeni() {
     return izbor;
 
 }
-
-
+//___________________LOGIN____________________________________________________________________
+int login(char username[30], char password[30], int br_clanova){
+    cin.ignore();
+    cout << linija << "\t Login " << linija;
+    cout << "Korisnicko ime: ";
+    cin.getline(username,30);
+    cout << "Lozinka: ";
+    cin.getline(password,30);
+    if(!strcmp(username,admin.administrator.username) && !strcmp(password, admin.administrator.password)){
+        return 0000;
+    }else{
+        for(int i=0;i<br_clanova;i++){
+            if(!strcmp(username, cln.clan.username) &&  !strcmp(password, cln.clan.password)){
+                return cln.clan.ID;
+            }
+        }
+    }
+    cin.ignore();
+}
 //------------------------------------------------------------------------------------------------
 //__________________________________REGISTRACIJE_________________________________________________
 
@@ -228,7 +245,8 @@ void opcija2() {
 }
 
 void opcija3() {
-    cout << << endl;
+    cout << "Exit"<< endl;
+
 
 }
 int loginMeni(){
@@ -271,8 +289,6 @@ int main(){
     admin.administrator.ID = 0000;
     admin.uloga = administrator;
 
-    registracija_knjige();
-    pregled_knjiga();
 
 //------------------------------------------------------------------------------------------------
 
