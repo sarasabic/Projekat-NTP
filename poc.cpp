@@ -79,6 +79,7 @@ void clanMeni(){
     }
 }
 
+
 //___________________LOGIN____________________________________________________________________
 int login(char username[30], char password[30], int br_clanova){
     cin.ignore();
@@ -113,7 +114,6 @@ void registracija_clana (){
     cin.getline(cln.clan.ime_prez,50);
     cout<<"Unesite korisnicko ime: \n";
     cin.getline(cln.clan.username,30);
-    cin.ignore();
     cout<<"Unesite lozinku: \n";
     cin.getline(cln.clan.password,30);
 
@@ -171,6 +171,7 @@ void pregled_knjiga() {
     }
 
     datoteka.close();
+    system("pause");
     system("cls");
 }
 
@@ -193,16 +194,22 @@ void potvrda_clanstva(fstream file_){
 }
 
 void ispisClanova(){
-    fstream file_;
-
-    file_.open("text.txt", ios::in);
-    string line;
-    if( file_.is_open()){
-        while(getline(file_,line)){
-            cout<<line<<endl;
-        }
+    ifstream datoteka("text.txt");
+    if (!datoteka) {
+        cerr << "Nemoguce otvoriti datoteku knjige_nazivi.txt." << endl;
+        return;
     }
-    file_.close();
+    string id, imeiprezime, username, password;
+
+    while (getline(datoteka, id) && getline(datoteka, imeiprezime) && getline(datoteka, username)&& getline(datoteka, password)) {
+        cout << "ID: " << id << endl;
+        cout << "Ime i prezime : " << imeiprezime<< endl;
+        cout << "Korisnicko ime: " << username << endl;
+        cout << "Lozinka: " << password << endl;
+        cout << endl;
+    }
+
+    datoteka.close();
     system("pause");
     system("cls");
 }
@@ -253,7 +260,7 @@ int adminMeni() {
                 cout << "Exiting..." << endl;
                 system("cls");
                 return 0;
-            default:
+                default:
                 cout << "Nepostojeca opcija!" << endl;
         }
     }
@@ -273,8 +280,8 @@ void opcija2() {
 
     br_clanova=br_clanova+1;
     system ("cls");
-    cout<<"                  REGISTROVALI STE SE U NAS SISTEM. "
-        <<endl<<endl<<"                  Izvrsite login:"<<endl<<endl;
+    system("color E0");
+    cout<<"REGISTROVALI STE SE U NAS SISTEM. " <<endl<<endl;
     system("pause");
     system ("cls");
 }
