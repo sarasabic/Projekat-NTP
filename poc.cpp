@@ -121,22 +121,58 @@ int adminMeni() {
 //---------------------------------LOGIN---------------------------------------------------------------
 
 //------------------------------------------------------------------------------------------------
-int login(char username[30], char password[30], int br_clanova){
-    cout << linija << "\t Login " << linija;
-    cout << "Korisnicko ime: ";
-    cin.getline(username,30);
-    cout << "Lozinka: ";
-    cin.getline(password,30);
-    if(!strcmp(username,admin.administrator.username) && !strcmp(password, admin.administrator.password)){
-        return 0000;
-    }else{
-        for(int i=0;i<br_clanova;i++){
-            if(!strcmp(username, cln.clan.username) &&  !strcmp(password, cln.clan.password)){
-                return cln.clan.ID;
-            }
+void opcija1() {
+    cout << "Opcija 1." << endl;
+    char username[20];
+    char password[30];
+    int broj=login(username,password,br_clanova);
+    if (broj==admin.administrator.ID){
+        if (adminMeni()==1){
+            ispisClanova();
+        }}
+}
+void opcija2() {
+    cout << "Opcija 2." << endl;
+    registracija_clana();
+
+    br_clanova=br_clanova+1;
+    system ("cls");
+    cout<<"                  REGISTROVALI STE SE U NAS SISTEM. "
+        <<endl<<endl<<"                  Izvrsite login:"<<endl<<endl;
+    system("pause");
+    system ("cls");
+}
+
+void opcija3() {
+    cout << << endl;
+
+}
+int loginMeni(){
+
+    while (true) {
+        cout << "Menu:" << endl;
+        cout << "1. Login" << endl;
+        cout << "2. Registracija clana" << endl;
+        cout << "3. Exit" << endl;
+
+        int opcija;
+        cout << "Izaberite opciju: ";
+        cin >> opcija;
+
+        switch (opcija) {
+            case 1:
+                opcija1();
+                break;
+            case 2:
+                opcija2();
+                break;
+            case 3:
+                cout << "Exiting..." << endl;
+                return 1;
+            default:
+                cout << "Netocan odabir. Pokusajte ponovo." << endl;
         }
     }
-    cin.ignore();
 }
 //------------------------------------------------------------------------------------------------
 //__________________________________REGISTRACIJE_________________________________________________
