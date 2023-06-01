@@ -2,6 +2,9 @@
 #include <fstream>
 #include<iomanip>
 #include<string.h>
+#include<stdlib.h>
+#include<windows.h>
+
 using namespace std;
 
 enum pozicija {clan, administrator};
@@ -44,7 +47,7 @@ int br_clanova=0;
 
 //CLAN MENI
 void clanMeni(){
-
+    system("color E0");
     int izbor1, izbor2;
     cout<<linija;
     do{
@@ -125,10 +128,11 @@ void registracija_clana (){
 
 void registracija_knjige(){
     Knjiga unos;
-    cin.ignore();
-    system ("cls");
+
     cout<<"Unesite naziv knjige: "<<endl;
+    cin.ignore();
     cin.getline(unos.Naziv_knjige, 30);
+
     cout<<"Unesite ime autora: "<<endl;
     cin.getline(unos.Ime_autora, 30);
     cout<<"Unesite prezime autora: "<<endl;
@@ -167,6 +171,7 @@ void pregled_knjiga() {
     }
 
     datoteka.close();
+    system("cls");
 }
 
 
@@ -198,27 +203,37 @@ void ispisClanova(){
         }
     }
     file_.close();
+    system("pause");
+    system("cls");
 }
 //_______________________________________________________________________________________
 void opcija4() {
     cout << "Opcija 1." << endl;
     ispisClanova();
-    system("cls");
+
 }
 
 void opcija5() {
     cout << "Opcija 2." << endl;
     registracija_knjige();
-    system("cls");
+
+}
+void opcija6() {
+    cout << "Opcija 3." << endl;
+    pregled_knjiga();
+
 }
 //ADMIN MENI
 int adminMeni() {
+    system("cls");
+    system("color 0D");
 
     while (true) {
         cout << linija << "\t ADMIN" << linija;
         cout << "1. Pregled clanova" << endl;
         cout << "2. Unos nove knjige" << endl;
-        cout << "3. Exit" << endl;
+        cout << "3. Pregled knjiga"<<endl;
+        cout << "4. Exit" << endl;
 
         int izbor;
         cout << "Unesite izbor: ";
@@ -227,13 +242,14 @@ int adminMeni() {
         switch (izbor) {
             case 1:
                 opcija4();
-                system("cls");
                 break;
             case 2:
                 opcija5();
-                system("cls");
                 break;
             case 3:
+                opcija6();
+                break;
+            case 4:
                 cout << "Exiting..." << endl;
                 system("cls");
                 return 0;
@@ -241,7 +257,6 @@ int adminMeni() {
                 cout << "Nepostojeca opcija!" << endl;
         }
     }
-    system("cls");
 }
 void opcija1() {
     cout << "Opcija 1." << endl;
@@ -272,7 +287,7 @@ void opcija3() {
 
 
 int loginMeni(){
-
+    system("color 03");
     while (true) {
         cout << linija << "\t  LOGIN " << linija;
         cout << "1. Login" << endl;
@@ -300,7 +315,9 @@ int loginMeni(){
                 cout << "Netocan odabir. Pokusajte ponovo." << endl;
         }
     }
+
     system("cls");
+
 }
 
 //MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN  MAIN
@@ -310,8 +327,8 @@ int loginMeni(){
 int main(){
 
     strcpy(admin.administrator.ime_prez, "Ana Anic");
-    strcpy(admin.administrator.username, "bibliotekar");
-    strcpy(admin.administrator.password, "biblioteka");
+    strcpy(admin.administrator.username, "b");
+    strcpy(admin.administrator.password, "b");
     admin.administrator.ID = 0000;
     admin.uloga = administrator;
 
