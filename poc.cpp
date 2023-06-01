@@ -39,7 +39,7 @@ char * linija = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 Administrator admin;
 Clan cln;
 
-
+int br_clanova=0;
 //-------------------------------STRUKTURE I DEKLARACIJE--------------------------------------------------------------
 
 //CLAN MENI
@@ -275,7 +275,7 @@ int main(){
     pregled_knjiga();
 
 //------------------------------------------------------------------------------------------------
-    int br_clanova=0;
+
     //char nazivknjige[30];
     ofstream knjige;
 
