@@ -25,6 +25,14 @@ struct Clan{
 
 };
 
+struct Knjiga{
+    char Naziv_knjige[30];
+    char Ime_autora[30];
+    char Prezime_autora[30];
+    int Godina_izdanja;
+    char Zanr[30];
+};
+
 //	Clan clanovi[maxclanova];
 
 char * linija = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
