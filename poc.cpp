@@ -45,39 +45,6 @@ Clan cln;
 int br_clanova=0;
 //-------------------------------STRUKTURE I DEKLARACIJE--------------------------------------------------------------
 
-//CLAN MENI
-void clanMeni(){
-    system("color E0");
-    int izbor1, izbor2;
-    cout<<linija;
-    do{
-        cout<<"\t \t MENI";
-        cout<<linija;
-        cout<<"1. Iznajmljivanje knjiga  "<<endl;
-        cout<<"2. Vracanje knjiga "<<endl;
-        cout<<"3. Iznajmljene knjige "<<endl;
-        cout<<"0. Exit ";
-        cout<<linija;
-        cin>>izbor1;
-        system("cls");
-    }while(izbor1<0 || izbor1>3);
-
-
-    if (izbor1==1){
-        cout<<linija;
-        cout<<"\t \t PRETRAGA ";
-        cout<<linija;
-        do{
-            cout<<"1. Pretraga knjiga abecedno "<<endl;
-            cout<<"2. Pretraga knjiga po zanru "<<endl;
-            cout<<"3. Pretraga knjiga po piscu "<<endl;
-            cout<<"4. Pretraga po nazivu knjige ";
-            cout<<linija;
-            cin>>izbor2;
-            system("cls");
-        }while(izbor1<2 || izbor1>4);
-    }
-}
 
 
 //___________________LOGIN____________________________________________________________________
@@ -291,6 +258,58 @@ void opcija3() {
     system("cls");
 
 }
+void opcija7() {
+    cout << "Opcija 1." << endl;
+
+}
+
+void opcija8() {
+    cout << "Opcija 2." << endl;
+
+}
+
+void opcija9() {
+    cout << "Opcija 3." << endl;
+    pregled_knjiga();
+
+}
+
+
+void clanMeni(){
+    system("color E0");
+    while (true) {
+        cout<<"\t \t MENI";
+        cout<<linija;
+        cout<<"1. Podizanje knjiga  "<<endl;
+        cout<<"2. Podignute knjige  "<<endl;
+        cout<<"3. Pregled knjiga "<<endl;
+        cout<<"4. ";
+
+        int izbor;
+        cout << "Unesite izbor: ";
+        cin >> izbor ;
+        system("cls");
+        switch (izbor) {
+            case 1:
+                opcija7();
+                break;
+            case 2:
+                opcija8();
+                break;
+            case 3:
+                opcija9();
+                break;
+            case 4:
+                cout << "Exiting..." << endl;
+                return;
+            default:
+                cout << "Nepostojeca opcija!" << endl;
+
+        }
+    }
+}
+
+
 
 
 int loginMeni(){
