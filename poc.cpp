@@ -42,23 +42,6 @@ Clan cln;
 
 //-------------------------------STRUKTURE I DEKLARACIJE--------------------------------------------------------------
 
-//LOGIN
-
-int loginMeni(){
-    system("cls");
-    int izbor;
-    do{
-        cout << linija << "\t  LOGIN " << linija;
-        cout << "1. Login " << endl;
-        cout << "2. Registracija clana " << endl;
-        cout << "3. Napustiti sistem " << endl;
-        cout << "Unesite izbor: ";
-        cin >> izbor;
-        cin.ignore();
-    }while(izbor<1 || izbor>3);
-    system("cls");
-    return izbor;
-}
 //CLAN MENI
 void clanMeni(){
 
@@ -251,7 +234,7 @@ void opcija3() {
 int loginMeni(){
 
     while (true) {
-        cout << "Menu:" << endl;
+        cout << linija << "\t  LOGIN " << linija;
         cout << "1. Login" << endl;
         cout << "2. Registracija clana" << endl;
         cout << "3. Exit" << endl;
