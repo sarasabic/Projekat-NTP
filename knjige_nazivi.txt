@@ -1,0 +1,80 @@
+Stranac
+Albert
+Kami
+1942
+Roman
+Berlin Alexanderplatz
+Alfred 
+Doblin
+1929
+Fantastika
+Price
+Anton
+Cehov
+1886
+Roman
+Proces
+Franc
+Kafka
+1925
+Roman
+Zamak
+Franc
+Kafka
+1926
+Roman
+Rat i mir
+Lav
+Tolstoj
+1869
+Roman
+Ana Karenjina
+Lav
+Tolstoj
+1877
+Roman
+Halal Zumra
+Alen
+Brlek
+2023
+Poezija
+Pjesme
+Paul
+Celan
+1952
+Poezija
+Bozanstvena komedija
+Dante
+Aligijeri
+1321
+Ep
+Ilijada
+Homer
+
+710
+Ep
+Odiseja
+Homer
+
+8
+Ep
+Eneida
+Vergilije
+
+19
+Ep
+Stihovi iz Automata
+Marko 
+Tomas
+2023
+Poezija
+Mlijeko i med
+Rupi 
+Kaur
+2017
+Poezija
+Pjesnicka antologija
+Mario
+Beneti
+1954
+Poezija
