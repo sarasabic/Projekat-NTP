@@ -87,8 +87,8 @@ void registracija_clana (){
 
     ofstream file_;
     file_.open("text.txt", ios::app);
-    file_<< cln.clan.ID<< "\n";
     file_<< cln.clan.ime_prez<< "\n";
+    file_<< cln.clan.ID<< "\n";
     file_<< cln.clan.username<< "\n";
     file_<< cln.clan.password<< "\n";
     file_.close();
@@ -144,6 +144,61 @@ void pregled_knjiga() {
     datoteka.close();
     system("pause");
     system("cls");
+}
+
+// ------------------------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------------------------
+// --------------------------------------------PRETRAGA KNJIGA-------------------------------------------------
+
+
+// ------------------------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------------------------
+// --------------------------------------------PRETRAGA CLANA--------------------------------------------------
+void pretraga_clana(){
+    ifstream file("text.txt");
+    if (!file) {
+        cerr << "Nemoguce otvoriti file." << endl;
+    }
+
+    string trazeni_red;
+    string red;
+    int brReda = 1;
+    cout << "Ime i prezime: ";
+    cin >> trazeni_red;
+    bool found = false;
+
+    while (getline(file, red)) {
+        if (red.find(trazeni_red) != string::npos) {
+            found = true;
+            for (int i = 0; i < 3; i++) {
+                if(i==0){
+                    cout<<"ID: ";
+                }
+                if(i==1){
+                    cout<<"Korisnicko ime: ";
+                }
+                if(i==2){
+                    cout<<"Lozinka: ";
+                }
+                if (getline(file, red))
+                    cout << red<< endl;
+                else
+                    break;
+            }
+            break;
+        }
+        brReda ++;
+    }
+    file.close();
+
+    if (!found) {
+        cout << "Nema trazenog clana." << endl;
+    }
+
+    file.close();
+    system("pause");
 }
 
 // ------------------------------------------------------------------------------------------------------------
@@ -212,6 +267,12 @@ void opcija6() {
     pregled_knjiga();
 
 }
+
+void opcija100() {
+    cout << "Opcija 4." << endl;
+    pretraga_clana();
+
+}
 // ------------------------------------------------------------------------------------------------------------
 
 
@@ -227,7 +288,8 @@ int adminMeni() {
         cout << "1. Pregled clanova" << endl;
         cout << "2. Unos nove knjige" << endl;
         cout << "3. Pregled knjiga"<<endl;
-        cout << "4. Exit" << endl;
+        cout << "4. Pretraga clana"<<endl;
+        cout << "5. Exit" << endl;
 
         int izbor;
         cout << "Unesite izbor: ";
@@ -244,10 +306,13 @@ int adminMeni() {
                 opcija6();
                 break;
             case 4:
+                opcija100();
+                break;
+            case 5:
                 cout << "Exiting..." << endl;
                 system("cls");
                 return 0;
-                default:
+            default:
                 cout << "Nepostojeca opcija!" << endl;
         }
     }
