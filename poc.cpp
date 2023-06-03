@@ -151,7 +151,52 @@ void pregled_knjiga() {
 // ------------------------------------------------------------------------------------------------------------
 // --------------------------------------------PRETRAGA KNJIGA-------------------------------------------------
 
+void pretraga_po_imenu(){
+    ifstream file("knjige_nazivi.txt");
+    if (!file) {
+        cerr << "Nemoguce otvoriti file." << endl;
+    }
 
+    string trazeni_red;
+    string red;
+    int brReda = 1;
+    cout << "Ime knjige: ";
+    cin >> trazeni_red;
+    bool found = false;
+
+    while (getline(file, red)) {
+        if (red.find(trazeni_red) != string::npos) {
+            found = true;
+            for (int i = 0; i < 4; i++) {
+                if(i==0){
+                    cout<<"Ime autora: ";
+                }
+                if(i==1){
+                    cout<<"Prezime autora ";
+                }
+                if(i==2){
+                    cout<<"Godina izdanja: ";
+                }
+                if(i==3){
+                    cout<<"Zanr: ";
+                }
+
+
+                if (getline(file, red))
+                    cout << red<< endl;
+                else
+                    break;
+            }
+            break;
+        }
+        brReda ++;
+    }
+    file.close();
+
+    if (!found) {
+        cout << "Nema trazene knjige." << endl;
+    }
+}
 // ------------------------------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------------------------------
