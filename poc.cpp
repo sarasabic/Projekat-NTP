@@ -41,14 +41,15 @@ struct Knjiga{
 
 char * linija = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 Administrator admin;
-Clan cln;
+Clan cln[100];
 int br_clanova=0;
-
+int brojac=0;
 // ------------------------------------------------------------------------------------------------------------
 //-------------------------------FUNKCIJE----------------------------------------------------------------------
 
 
 //--------------------------------LOGIN------------------------------------------------------------------------
+
 int login(char username[30], char password[30], int br_clanova){
     cin.ignore();
     cout << linija << "\t Login " << linija;
@@ -61,8 +62,9 @@ int login(char username[30], char password[30], int br_clanova){
         return 0000;
     }else{
         for(int i=0;i<br_clanova;i++){
-            if(!strcmp(username, cln.clan.username) &&  !strcmp(password, cln.clan.password)){
-                return cln.clan.ID;
+            if(!strcmp(username, cln[i].clan.username) &&  !strcmp(password, cln[i].clan.password)){
+                system ("cls");
+                return cln[i].clan.ID;
             }
         }
     }
@@ -76,22 +78,23 @@ int login(char username[30], char password[30], int br_clanova){
 void registracija_clana (){
 
     cout<<"Unesite ID: \n";
-    cin>> cln.clan.ID;
+    cin>> cln[brojac].clan.ID;
     cin.ignore();
     cout<<"Unesite Ime i prezime: \n";
-    cin.getline(cln.clan.ime_prez,50);
+    cin.getline(cln[brojac].clan.ime_prez,50);
     cout<<"Unesite korisnicko ime: \n";
-    cin.getline(cln.clan.username,30);
+    cin.getline(cln[brojac].clan.username,30);
     cout<<"Unesite lozinku: \n";
-    cin.getline(cln.clan.password,30);
+    cin.getline(cln[brojac].clan.password,30);
 
     ofstream file_;
     file_.open("text.txt", ios::app);
-    file_<< cln.clan.ime_prez<< "\n";
-    file_<< cln.clan.ID<< "\n";
-    file_<< cln.clan.username<< "\n";
-    file_<< cln.clan.password<< "\n";
+    file_<< cln[brojac].clan.ime_prez<< "\n";
+    file_<< cln[brojac].clan.ID<< "\n";
+    file_<< cln[brojac].clan.username<< "\n";
+    file_<< cln[brojac].clan.password<< "\n";
     file_.close();
+    brojac++;
 }
 
 void registracija_knjige(){
@@ -261,7 +264,7 @@ void potvrda_clanstva(fstream file_){
     string line;
     while (!file_.eof()){
         current_line++;
-        trazena_linija= cln.clan.username;
+        trazena_linija= cln[brojac].clan.username;
         //	if (current_line == trazena_linija);
         cout<<current_line<<endl;
     }
@@ -367,37 +370,54 @@ int adminMeni() {
 
 // ------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------OPCIJE ZA MENI---------------------------------------------
-
-void opcija1() {
-    cout << "Opcija 1." << endl;
-    char username[20];
-    char password[30];
-    int broj=login(username,password,br_clanova);
-    if (broj==admin.administrator.ID){
-        adminMeni();
-        system("cls");
-    }}
-void opcija2() {
+void opcija71() {
     cout << "Opcija 2." << endl;
-    registracija_clana();
+    pretraga_po_imenu();
 
-    br_clanova=br_clanova+1;
-    system ("cls");
-    system("color E0");
-    cout<<"REGISTROVALI STE SE U NAS SISTEM. " <<endl<<endl;
-    system("pause");
-    system ("cls");
 }
+void opcija72() {
+    cout << "Opcija 2." << endl;
 
-void opcija3() {
-    cout << "Exit"<< endl;
-    system("cls");
+}
+void opcija73() {
+    cout << "Opcija 2." << endl;
 
 }
 void opcija7() {
     cout << "Opcija 1." << endl;
+    while (true) {
+        cout<<"\t \t MENI";
+        cout<<linija;
+        cout<<"1. Pretraga po nazivu knjige "<<endl;
+        cout<<"2.  "<<endl;
+        cout<<"3.  "<<endl;
+        cout<<"4. EXIT";
 
+        int izbor;
+        cout << "Unesite izbor: ";
+        cin >> izbor ;
+        system("cls");
+        switch (izbor) {
+            case 1:
+                opcija71();
+                break;
+            case 2:
+                opcija72();
+                break;
+            case 3:
+                opcija73();
+                break;
+            case 4:
+                cout << "Exiting..." << endl;
+                return;
+            default:
+                cout << "Nepostojeca opcija!" << endl;
+
+        }
+    }
 }
+
+
 
 void opcija8() {
     cout << "Opcija 2." << endl;
@@ -409,12 +429,6 @@ void opcija9() {
     pregled_knjiga();
 
 }
-// ----------------------------------------------------------------------------------------------------------
-
-
-// ----------------------------------------------------------------------------------------------------------
-// -----------------------------------------------CLAN MENI--------------------------------------------------
-
 void clanMeni(){
     system("color 0E");
     while (true) {
@@ -448,6 +462,40 @@ void clanMeni(){
         }
     }
 }
+void opcija1() {
+    cout << "Opcija 1." << endl;
+    char username[20];
+    char password[30];
+    int broj=login(username,password,br_clanova);
+    if (broj==admin.administrator.ID){
+        adminMeni();
+        system("cls");
+    }
+    for(int i=0; i<100; i++){
+        if (broj==cln[i].clan.ID){
+            clanMeni();
+            system("cls");
+        }
+    }
+}
+void opcija2() {
+    cout << "Opcija 2." << endl;
+    registracija_clana();
+
+    br_clanova=br_clanova+1;
+    system ("cls");
+    system("color E0");
+    cout<<"REGISTROVALI STE SE U NAS SISTEM. " <<endl<<endl;
+    system("pause");
+    system ("cls");
+}
+
+void opcija3() {
+    cout << "Exit"<< endl;
+    system("cls");
+
+}
+
 // ------------------------------------------------------------------------------------------------------------
 
 
