@@ -61,12 +61,40 @@ int login(char username[30], char password[30], int br_clanova){
         system("cls");
         return 0000;
     }else{
-        for(int i=0;i<br_clanova;i++){
-            if(!strcmp(username, cln.clan.username) &&  !strcmp(password, cln.clan.password)){
-                system ("cls");
-                return cln.clan.ID;
+        ifstream datoteka("text.txt");
+        if (!datoteka.is_open()) {
+            cout << "Nemoguce otvoriti fajl." << endl;
+            return -1;
+        }
+
+        string redak;
+        Osoba osoba;
+
+        while (getline(datoteka, redak)) {
+            if (redak.empty()) {
+                if (strcmp(osoba.username, username) == 0 && strcmp(osoba.password, password) == 0) {
+
+                    return osoba.ID;
+                    break;
+                }
+                osoba = Osoba();
+            } else {
+                if (osoba.ime_prez[0] == '\0') {
+                    strcpy(osoba.ime_prez, redak.c_str());
+                } else if (osoba.ID == 0) {
+                    istringstream iss(redak);
+                    iss >> osoba.ID;
+                } else if (osoba.username[0] == '\0') {
+                    strcpy(osoba.username, redak.c_str());
+                } else if (osoba.password[0] == '\0') {
+                    strcpy(osoba.password, redak.c_str());
+                }
             }
         }
+
+        datoteka.close();
+
+
     }
 
     cin.ignore();
@@ -76,25 +104,25 @@ int login(char username[30], char password[30], int br_clanova){
 // ---------------------------------REGISTRACIJE--------------------------------------------------
 
 void registracija_clana (){
-
-    cout<<"Unesite ID: \n";
-    cin>> cln.clan.ID;
     cin.ignore();
     cout<<"Unesite Ime i prezime: \n";
     cin.getline(cln.clan.ime_prez,50);
+    cout<<"Unesite ID: \n";
+    cin>> cln.clan.ID;
+    cin.ignore();
     cout<<"Unesite korisnicko ime: \n";
     cin.getline(cln.clan.username,30);
     cout<<"Unesite lozinku: \n";
     cin.getline(cln.clan.password,30);
 
-    ofstream file_;
-    file_.open("text.txt", ios::app);
-    file_<< cln.clan.ime_prez<< "\n";
-    file_<< cln.clan.ID<< "\n";
-    file_<< cln.clan.username<< "\n";
-    file_<< cln.clan.password<< "\n";
-    file_.close();
-    brojac++;
+    ofstream datoteka_;
+    datoteka_.open("text.txt", ios::app);
+    datoteka_<< "\n";
+    datoteka_<< cln.clan.ime_prez<< "\n";
+    datoteka_<< cln.clan.ID<< "\n";
+    datoteka_<< cln.clan.username<< "\n";
+    datoteka_<< cln.clan.password<< "\n";
+    datoteka_.close();
 }
 
 void registracija_knjige(){
@@ -155,8 +183,8 @@ void pregled_knjiga() {
 // --------------------------------------------PRETRAGA KNJIGA-------------------------------------------------
 
 void pretraga_po_nazivu(){
-    ifstream file("knjige_nazivi.txt");
-    if (!file) {
+    ifstream fajl("knjige_nazivi.txt");
+    if (!fajl) {
         cerr << "Nemoguce otvoriti file." << endl;
     }
 
@@ -167,7 +195,7 @@ void pretraga_po_nazivu(){
     cin >> trazeni_red;
     bool found = false;
 
-    while (getline(file, red)) {
+    while (getline(fajl, red)) {
         if (red.find(trazeni_red) != string::npos) {
             found = true;
             for (int i = 0; i < 4; i++) {
@@ -185,7 +213,7 @@ void pretraga_po_nazivu(){
                 }
 
 
-                if (getline(file, red))
+                if (getline(fajl, red))
                     cout << red<< endl;
                 else
                     break;
@@ -194,7 +222,7 @@ void pretraga_po_nazivu(){
         }
         brReda ++;
     }
-    file.close();
+    fajl.close();
 
     if (!found) {
         cout << "Nema trazene knjige." << endl;
