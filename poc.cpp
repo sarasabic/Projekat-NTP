@@ -10,6 +10,7 @@ enum pozicija {clan, administrator};
 
 // ------------------------------------------------------------------------------------------------------------
 // ---------------------------------------STRUKTURE------------------------------------------------------------
+
 struct Osoba{
     char ime_prez[50];
     char username[30];
@@ -44,6 +45,7 @@ Administrator admin;
 Clan cln;
 int br_clanova=0;
 int brojac=0;
+
 // ------------------------------------------------------------------------------------------------------------
 //-------------------------------FUNKCIJE----------------------------------------------------------------------
 
@@ -228,14 +230,16 @@ void pretraga_po_nazivu(){
         cout << "Nema trazene knjige." << endl;
     }
 }
+
 // ------------------------------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------------------------------
 // --------------------------------------------PRETRAGA CLANA--------------------------------------------------
+
 void pretraga_clana(){
-    ifstream file("text.txt");
-    if (!file) {
-        cerr << "Nemoguce otvoriti file." << endl;
+    ifstream fajl("text.txt");
+    if (!fajl) {
+        cerr << "Nemoguce otvoriti fajl." << endl;
     }
 
     string trazeni_red;
@@ -245,7 +249,7 @@ void pretraga_clana(){
     cin >> trazeni_red;
     bool found = false;
 
-    while (getline(file, red)) {
+    while (getline(fajl, red)) {
         if (red.find(trazeni_red) != string::npos) {
             found = true;
             for (int i = 0; i < 3; i++) {
@@ -258,7 +262,7 @@ void pretraga_clana(){
                 if(i==2){
                     cout<<"Lozinka: ";
                 }
-                if (getline(file, red))
+                if (getline(fajl, red))
                     cout << red<< endl;
                 else
                     break;
@@ -267,13 +271,13 @@ void pretraga_clana(){
         }
         brReda ++;
     }
-    file.close();
+    fajl.close();
 
     if (!found) {
         cout << "Nema trazenog clana." << endl;
     }
 
-    file.close();
+    fajl.close();
     system("pause");
 }
 
@@ -323,9 +327,9 @@ void ispisClanova(){
     system("pause");
     system("cls");
 }
+
 // ------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------OPCIJE ZA MENI------------------------------------------------
-
 
 void opcija4() {
     cout << "Opcija 1." << endl;
@@ -349,6 +353,7 @@ void opcija100() {
     pretraga_clana();
 
 }
+
 // ------------------------------------------------------------------------------------------------------------
 
 
@@ -393,6 +398,7 @@ int adminMeni() {
         }
     }
 }
+
 // ------------------------------------------------------------------------------------------------------------
 
 
@@ -402,8 +408,6 @@ int adminMeni() {
 void opcija7() {
 
 }
-
-
 
 void opcija8() {
     cout << "Opcija 2." << endl;
@@ -415,6 +419,7 @@ void opcija9() {
     pregled_knjiga();
 
 }
+
 void clanMeni(){
     system("color 0E");
     while (true) {
@@ -448,7 +453,9 @@ void clanMeni(){
         }
     }
 }
+
 void opcija1() {
+
     cout << "Opcija 1." << endl;
     char username[20];
     char password[30];
@@ -458,10 +465,34 @@ void opcija1() {
         system("cls");
     }
 
-    if (broj==cln.clan.ID){
-        clanMeni();
-        system("cls");
+
+    ifstream datoteka("text.txt");
+    if (!datoteka.is_open()) {
+        cout << "Nemoguce otvoriti fajl." << endl;
+        return;
     }
+
+
+    string Lin;
+    int brojLin = 1;
+
+    while (getline(datoteka, Lin)) {
+        if (brojLin % 5 == 3) {
+            int ID = stoi(Lin);
+
+            if (broj == ID) {
+                system("cls");
+                clanMeni();
+                system("cls");
+                break;
+            }
+        }
+
+        brojLin++;
+    }
+
+    datoteka.close();
+
 }
 
 void opcija2() {
@@ -514,7 +545,7 @@ int loginMeni(){
                 system("cls");
                 return 1;
             default:
-                cout << "Netocan odabir. Pokusajte ponovo." << endl;
+                cout << "Netacan odabir. Pokusajte ponovo." << endl;
         }
     }
 
