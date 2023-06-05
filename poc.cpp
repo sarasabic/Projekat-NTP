@@ -1,8 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <string.h>
+#include <cstring>
 #include <stdlib.h>
+#include <vector>
 #include <windows.h>
 using namespace std;
 
@@ -45,6 +46,57 @@ Administrator admin;
 Clan cln;
 int br_clanova=0;
 int brojac=0;
+
+//-------------------------------------------------------------------------------------------------------------
+
+
+Clan *niz_clanovi(){
+    static Clan niz[100];
+
+
+    ifstream datoteka("text.txt");
+
+    if (!datoteka) {
+        cout << "Nemoguce otvoriti datoteku." << endl;
+        return nullptr;
+    }
+    string id, imeiprezime, username, password;
+    int i = 0;
+
+    string red;
+    while (getline(datoteka, red)) {
+        if (red.empty()) {
+            continue;
+        }
+
+        imeiprezime = red;
+        getline(datoteka, id);
+        getline(datoteka, username);
+        getline(datoteka, password);
+
+        if (i >= 100) {
+            cout << "Prekoracen je broj clanova u datoteci." << endl;
+            break;
+        }
+
+        strncpy(niz[i].clan.ime_prez, imeiprezime.c_str(), sizeof(niz[i].clan.ime_prez) - 1);
+        niz[i].clan.ime_prez[sizeof(niz[i].clan.ime_prez) - 1] = '\0';
+
+        niz[i].clan.ID = stoi(id);
+
+        strncpy(niz[i].clan.username, username.c_str(), sizeof(niz[i].clan.username) - 1);
+        niz[i].clan.username[sizeof(niz[i].clan.username) - 1] = '\0';
+
+        strncpy(niz[i].clan.password, password.c_str(), sizeof(niz[i].clan.password) - 1);
+        niz[i].clan.password[sizeof(niz[i].clan.password) - 1] = '\0';
+
+        i++;
+    }
+
+    datoteka.close();
+    return niz;
+}
+//-------------------------------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------------------------------
 //-------------------------------FUNKCIJE----------------------------------------------------------------------
@@ -553,6 +605,7 @@ int loginMeni(){
 
 }
 
+
 // ------------------------------------------------------------------------------------------------------------
 
 
@@ -571,13 +624,15 @@ int main(){
     admin.uloga = administrator;
 
 //-------------------------------------------------------------------------------------------------------------
-
-    ofstream datoteka_;
-    datoteka_.open("text.txt", ios::app);
-       datoteka_<<"\n";
-       datoteka_.close();
-
-
+//provjera niza
+    /*   Clan *n;
+       n=niz_clanovi();
+       for(int i=0; i<3; i++){
+           cout<<n[i].clan.ime_prez<<endl;
+           cout<<n[i].clan.ID<<endl;
+           cout<<n[i].clan.username<<endl;
+           cout<<n[i].clan.password<<endl;
+       }*/
 
     ofstream knjige;
 
