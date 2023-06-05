@@ -119,11 +119,11 @@ void registracija_clana (){
 
     ofstream datoteka_;
     datoteka_.open("text.txt", ios::app);
-    datoteka_<< "\n";
     datoteka_<< cln.clan.ime_prez<< "\n";
     datoteka_<< cln.clan.ID<< "\n";
     datoteka_<< cln.clan.username<< "\n";
     datoteka_<< cln.clan.password<< "\n";
+    datoteka_<< "\n";
     datoteka_.close();
 }
 
@@ -571,6 +571,13 @@ int main(){
     admin.uloga = administrator;
 
 //-------------------------------------------------------------------------------------------------------------
+
+    ofstream datoteka_;
+    datoteka_.open("text.txt", ios::app);
+       datoteka_<<"\n";
+       datoteka_.close();
+
+
 
     ofstream knjige;
 
