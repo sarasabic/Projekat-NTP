@@ -220,29 +220,51 @@ void registracija_clana (){
 
 void registracija_knjige(){
     Knjiga unos;
-
     cout<<"Unesite naziv knjige: "<<endl;
     cin.ignore();
     cin.getline(unos.Naziv_knjige, 30);
 
-    cout<<"Unesite ime autora: "<<endl;
-    cin.getline(unos.Ime_autora, 30);
-    cout<<"Unesite prezime autora: "<<endl;
-    cin.getline(unos.Prezime_autora, 30);
-    cout<<"Unesite godinu izdanja knjige: "<<endl;
-    cin>>unos.Godina_izdanja;
-    cin.ignore();
-    cout<<"Unesite zanr: "<<endl;
-    cin.getline(unos.Zanr, 30);
-    ofstream knjige;
-    knjige.open("knjige_nazivi.txt", ios::app);
-    knjige<< unos.Naziv_knjige<<"\n";
-    knjige<< unos.Ime_autora<<"\n";
-    knjige<< unos.Prezime_autora<<"\n";
-    knjige<< unos.Godina_izdanja<<"\n";
-    knjige<< unos.Zanr<<"\n";
-    knjige.close();
-    system ("cls");
+    ifstream fajl("knjige_nazivi.txt");
+    if (!fajl) {
+        cerr << "Nemoguce otvoriti fajl." << endl;
+    }
+    string trazeni_red=unos.Naziv_knjige;
+    string red;
+    int brReda = 1;
+
+    bool found = false;
+
+    while (getline(fajl, red)) {
+        if (red.find(trazeni_red) != string::npos) {
+            found = true;
+           cout<<"Knjiga je vec registrovana u sistem.";
+            break;
+        }
+        brReda ++;
+    }
+    fajl.close();
+    if (!found) {
+        cout<<"Unesite ime autora: "<<endl;
+        cin.getline(unos.Ime_autora, 30);
+        cout<<"Unesite prezime autora: "<<endl;
+        cin.getline(unos.Prezime_autora, 30);
+        cout<<"Unesite godinu izdanja knjige: "<<endl;
+        cin>>unos.Godina_izdanja;
+        cin.ignore();
+        cout<<"Unesite zanr: "<<endl;
+        cin.getline(unos.Zanr, 30);
+        ofstream knjige;
+        knjige.open("knjige_nazivi.txt", ios::app);
+        knjige<< unos.Naziv_knjige<<"\n";
+        knjige<< unos.Ime_autora<<"\n";
+        knjige<< unos.Prezime_autora<<"\n";
+        knjige<< unos.Godina_izdanja<<"\n";
+        knjige<< unos.Zanr<<"\n";
+        knjige.close();
+        system ("cls");
+    }
+    fajl.close();
+    system("pause");
 }
 
 // ------------------------------------------------------------------------------------------------------------
