@@ -175,12 +175,12 @@ void registracija_clana (){
 
     cout<<"Vas ID je: \n";
     for (int i=0; i< sizeof (niz); i++){
-       do{
-           srand(time(NULL));
-           rand();
-           ID=rand()%100+900;
+        do{
+            srand(time(NULL));
+            rand();
+            ID=rand()%100+900;
 
-       }  while(ID==niz[i].clan.ID);
+        }  while(ID==niz[i].clan.ID);
     }
     cln.clan.ID=ID;
     cout<<ID<<endl;
@@ -237,7 +237,7 @@ void registracija_knjige(){
     while (getline(fajl, red)) {
         if (red.find(trazeni_red) != string::npos) {
             found = true;
-           cout<<"Knjiga je vec registrovana u sistem.";
+            cout<<"Knjiga je vec registrovana u sistem.";
             break;
         }
         brReda ++;
@@ -573,7 +573,7 @@ void clanMeni(){
                 break;
             case 4:
 
-             break;
+                break;
             case 5:
                 return;
             default:
