@@ -17,6 +17,7 @@ struct Osoba{
     char username[30];
     char password[30];
     int ID;
+    string iznajmljenja;
 };
 
 struct Administrator{
@@ -28,7 +29,6 @@ struct Administrator{
 struct Clan{
     Osoba clan;
     pozicija uloga;
-
 };
 
 struct Knjiga{
@@ -47,12 +47,19 @@ Clan cln;
 int br_clanova=0;
 int brojac=0;
 
+void iznajmljene_knj();
+void clanMeni();
+int opcija1();
+void opcija7();
+void opcija8();
+void opcija9();
+int adminMeni();
+int login(char username[30], char password[30], int br_clanova);
 //-------------------------------------------------------------------------------------------------------------
 
 
 Clan *niz_clanovi(){
     static Clan niz[100];
-
 
     ifstream datoteka("text.txt");
 
@@ -159,13 +166,45 @@ int login(char username[30], char password[30], int br_clanova){
 
 void registracija_clana (){
     cin.ignore();
+    int ID;
+    Clan *niz;
+    niz=niz_clanovi();
+
     cout<<"Unesite Ime i prezime: \n";
     cin.getline(cln.clan.ime_prez,50);
-    cout<<"Unesite ID: \n";
-    cin>> cln.clan.ID;
-    cin.ignore();
-    cout<<"Unesite korisnicko ime: \n";
-    cin.getline(cln.clan.username,30);
+
+    cout<<"Vas ID je: \n";
+    for (int i=0; i< sizeof (niz); i++){
+       do{
+           srand(time(NULL));
+           rand();
+           ID=rand()%100+900;
+
+       }  while(ID==niz[i].clan.ID);
+    }
+    cln.clan.ID=ID;
+    cout<<ID<<endl;
+
+    bool duplikat = false;
+    do {
+        cout << "Unesite korisnicko ime: \n";
+        cin.getline(cln.clan.username, 30);
+
+        duplikat= false;
+
+        for (int i = 0; i < sizeof (niz); i++) {
+            if (strcmp(cln.clan.username, niz[i].clan.username) == 0) {
+                duplikat = true;
+                break;
+            }
+        }
+
+        if (duplikat) {
+            cout << "Korisnicko ime vec postoji. Molimo unesite drugo korisnicko ime.\n";
+        }
+    } while (duplikat);
+
+
     cout<<"Unesite lozinku: \n";
     cin.getline(cln.clan.password,30);
 
@@ -335,26 +374,6 @@ void pretraga_clana(){
 
 // ------------------------------------------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------------------------------------------
-// --------------------------------------------POTVRDA CLANSTVA------------------------------------------------
-
-void potvrda_clanstva(fstream file_){
-    string trazena_linija;
-    file_.open("text.txt");
-    if(file_.fail()){
-        cout<<"Nije moguce otvoriti file!"<<endl;
-    }
-    int current_line=0;
-    string line;
-    while (!file_.eof()){
-        current_line++;
-        trazena_linija= cln.clan.username;
-        //	if (current_line == trazena_linija);
-        cout<<current_line<<endl;
-    }
-}
-
-// ------------------------------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------------------------------
 // ------------------------------------------------ISPIS CLANOVA-----------------------------------------------
@@ -472,6 +491,7 @@ void opcija9() {
 
 }
 
+
 void clanMeni(){
     system("color 0E");
     while (true) {
@@ -480,7 +500,8 @@ void clanMeni(){
         cout<<"1. Podizanje knjiga  "<<endl;
         cout<<"2. Pretraga naziva knjige  "<<endl;
         cout<<"3. Pregled knjiga "<<endl;
-        cout<<"4. EXIT "<<endl;
+        cout<<"4. Iznajmljivanje "<<endl;
+        cout<<"5. EXIT "<<endl;
 
         int izbor;
         cout << "Unesite izbor: ";
@@ -497,16 +518,18 @@ void clanMeni(){
                 opcija9();
                 break;
             case 4:
-                cout << "Exiting..." << endl;
+
+             break;
+            case 5:
                 return;
             default:
                 cout << "Nepostojeca opcija!" << endl;
-
         }
     }
 }
 
-void opcija1() {
+
+int opcija1() {
 
     cout << "Opcija 1." << endl;
     char username[20];
@@ -521,7 +544,7 @@ void opcija1() {
     ifstream datoteka("text.txt");
     if (!datoteka.is_open()) {
         cout << "Nemoguce otvoriti fajl." << endl;
-        return;
+        return -1;
     }
 
 
@@ -535,17 +558,17 @@ void opcija1() {
             if (broj == ID) {
                 system("cls");
                 clanMeni();
-                system("cls");
-                break;
+                system ("cls");
+
             }
         }
-
         brojLin++;
     }
 
     datoteka.close();
-
+    return broj;
 }
+
 
 void opcija2() {
     cout << "Opcija 2." << endl;
@@ -625,7 +648,7 @@ int main(){
 
 //-------------------------------------------------------------------------------------------------------------
 //provjera niza
-    /*   Clan *n;
+    /*  Clan *n;
        n=niz_clanovi();
        for(int i=0; i<3; i++){
            cout<<n[i].clan.ime_prez<<endl;
