@@ -495,6 +495,7 @@ int adminMeni() {
         cout << "5, Pregled clanova preko ID-a" << endl;
         cout << "6. Exit" << endl;
         int izbor;
+
         cout << "Unesite izbor: ";
         cin >>izbor ;
         system("cls");
@@ -530,9 +531,6 @@ int adminMeni() {
 // ------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------OPCIJE ZA MENI---------------------------------------------
 
-void opcija7() {
-
-}
 
 void opcija8() {
     cout << "Opcija 2." << endl;
@@ -551,30 +549,23 @@ void clanMeni(){
     while (true) {
         cout<<"\t \t MENI";
         cout<<linija;
-        cout<<"1. Podizanje knjiga  "<<endl;
-        cout<<"2. Pretraga naziva knjige  "<<endl;
-        cout<<"3. Pregled knjiga "<<endl;
-        cout<<"4. Iznajmljivanje "<<endl;
-        cout<<"5. EXIT "<<endl;
+        cout<<"1. Pretraga preko naziva knjige  "<<endl;
+        cout<<"2. Pregled knjiga "<<endl;
+        cout<<"3. EXIT "<<endl;
 
         int izbor;
         cout << "Unesite izbor: ";
         cin >> izbor ;
         system("cls");
         switch (izbor) {
+
             case 1:
-                opcija7();
-                break;
-            case 2:
                 opcija8();
                 break;
-            case 3:
+            case 2:
                 opcija9();
                 break;
-            case 4:
-
-                break;
-            case 5:
+            case 3:
                 return;
             default:
                 cout << "Nepostojeca opcija!" << endl;
