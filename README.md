@@ -1,2 +1,2 @@
 # Projekat-NTP
-Sistem biblioteke i iznajmljivanje knjiga, učlanjenje u biblioteku
+Sistem biblioteke i iznajmljivanje knjiga, učlanjivanje u biblioteku
